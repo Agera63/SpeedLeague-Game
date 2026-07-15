@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 1278821849, guid: 7c0bac27308dcf24eb0bf21c68fb9c41, type: 3}
   m_Name: MVCSettings_Data
   m_EditorClassIdentifier: 
-  settingsFoldout: 5
+  settingsFoldout: 9
   soundEffectsFoldout: 0
   autoCheckForUpdates: 1
   editorValuesUnit: 0
@@ -82,21 +82,21 @@ MonoBehaviour:
   useDownforce: 1
   useDownforceWhenNotGrounded: 1
   useAirAntiRoll: 1
-  airAntiRollIntensity: 1
+  airAntiRollIntensity: 1.65
   useHalfGroundedAntiSwayBars: 1
   useDrag: 1
   useChassisWings: 1
   useAntiGroundColliders: 1
   useEngineMass: 1
   useWheelsMass: 1
-  steeringInterpolation: 0
-  steerIntensity: 5
-  steerReleaseIntensity: 10
-  maximumSteerAngle: 45
-  minimumSteerAngle: 5
+  steeringInterpolation: 1
+  steerIntensity: 0.6
+  steerReleaseIntensity: 0.6
+  maximumSteerAngle: 70
+  minimumSteerAngle: 2.5
   useSuspensionAdjustments: 1
-  maximumCamberAngle: 10
-  maximumCasterAngle: 10
+  maximumCamberAngle: 15
+  maximumCasterAngle: 15
   maximumToeAngle: 10
   maximumSideOffset: 0.25
   sideOffsetAffectHandling: 1
@@ -110,13 +110,13 @@ MonoBehaviour:
   useCounterSteer: 1
   counterSteerType: 0
   counterSteerPriority: -1
-  counterSteerIntensity: 0.5
+  counterSteerIntensity: 0.75
   counterSteerDamping: 25
   useDynamicSteering: 1
   useDamage: 1
   damageLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2047
   damageLowVelocity: 5
   damageMediumVelocity: 15
   damageHighVelocity: 25
@@ -173,7 +173,7 @@ MonoBehaviour:
   engineSFXFolderPath: SFX/Engines
   engineSFXNameSplitter: 95
   maxEngineSFXClips: 7
-  SFXVolume: 0.5
+  SFXVolume: 0.049999993
   impactClips:
     cars:
       low:
@@ -966,7 +966,7 @@ MonoBehaviour:
   tireCompounds:
   - frictionComplexity: 0
     wheelColliderAccelerationFriction:
-      extremumSlip: 0.2
+      extremumSlip: 0.25
       extremumValue: 1
       asymptoteSlip: 0.8
       asymptoteValue: 0.75
@@ -992,7 +992,7 @@ MonoBehaviour:
         a: 18
         b: 54
     wheelColliderSidewaysFriction:
-      extremumSlip: 0.25
+      extremumSlip: 0.5
       extremumValue: 1
       asymptoteSlip: 0.5
       asymptoteValue: 0.75
@@ -2078,8 +2078,8 @@ MonoBehaviour:
     flatSkidClip: {fileID: 8300000, guid: 2f7d892e29c0adc4780c88b154a1f741, type: 3}
     flatRollClip: {fileID: 8300000, guid: bfff940736b5401459a3ce4e58548aa5, type: 3}
     name: Asphalt
-    frictionStiffness: 1
-    damagedWheelStiffness: 0.4
+    frictionStiffness: 1.2
+    damagedWheelStiffness: 0.8
     wheelDampingRate: 1
     wheelBurnoutDampingRate: 0.1
     markMaterialTiling: 4
