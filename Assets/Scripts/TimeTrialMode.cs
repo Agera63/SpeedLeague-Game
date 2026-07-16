@@ -10,28 +10,27 @@ public class TimeTrialMode : MonoBehaviour
     private bool isTimerCounting;
 
     //the checkpoints need to be in SUBSEQUENT ORDER 
-    [SerializeField] private GameObject[] checkpoints;
+    private GameObject[] checkpoints;
     private int checkpointCounter;
 
-    void Start()
+    void Awake()
     {
-        int tempCounter = 0;
-        foreach(GameObject cp in checkpoints)
+        checkpoints= new GameObject[gameObject.transform.childCount];
+        for (int counter = 0; counter < gameObject.transform.childCount; counter++) 
         {
-            var checkpointScript = cp.GetComponent<Checkpoint>();
-            checkpointScript.onCheckpointEnter += RegisterCheckpoint;
+            GameObject checkpointGO = gameObject.transform.GetChild(counter).gameObject;
+            checkpoints[counter] = checkpointGO;
 
-            //Allows an order to be established based on the order given in the "checkpoints" array
-            checkpointScript.checkpointNumber = tempCounter;
-            tempCounter++;
+            Checkpoint checkpointScript = checkpointGO.GetComponent<Checkpoint>();
+            checkpointScript.onCheckpointEnter += RegisterCheckpoint;
+            //Allows an order to be established based on the order given in this gameobject (CheckpointManager)
+            checkpointScript.checkpointNumber = counter;
         }
 
         //Always starts false to let the player gain momentum before the first checkpoint.
         isTimerCounting = false;
         timer = 0;
         checkpointCounter = 0;
-
-        
     }
 
     void Update()
