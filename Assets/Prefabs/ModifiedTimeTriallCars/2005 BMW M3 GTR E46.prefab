@@ -2242,8 +2242,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1162174378534292445}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.7784208, y: 0.32841492, z: 1.4247098}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.777, y: 0.32840824, z: 1.4247094}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2797,7 +2797,7 @@ Transform:
   m_GameObject: {fileID: 1162174378722107395}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.7629998, y: 0.32840824, z: -1.2465277}
+  m_LocalPosition: {x: -0.763, y: 0.32840824, z: -1.2465277}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3380,8 +3380,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1162174378966988321}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.7784204, y: 0.32841492, z: 1.4247096}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.777, y: 0.32840824, z: 1.4247094}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4425,8 +4425,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1162174379197340034}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.7770003, y: 0.32840824, z: 1.4247096}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.777, y: 0.32840824, z: 1.4247094}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4460,7 +4460,7 @@ Transform:
   m_GameObject: {fileID: 1162174379262961201}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.76299983, y: 0.32840824, z: -1.246528}
+  m_LocalPosition: {x: 0.763, y: 0.32840824, z: -1.2465277}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4524,7 +4524,7 @@ Transform:
   m_GameObject: {fileID: 1162174379309531204}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.7629998, y: 0.32840824, z: -1.2465277}
+  m_LocalPosition: {x: -0.763, y: 0.32840824, z: -1.2465277}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4665,8 +4665,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1162174379342367732}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.77699995, y: 0.32840824, z: 1.4247097}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.777, y: 0.32840824, z: 1.4247094}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5454,6 +5454,8 @@ GameObject:
   - component: {fileID: 1162174379603879381}
   - component: {fileID: 1162174379603879378}
   - component: {fileID: 7676287433048258485}
+  - component: {fileID: 8663068854886071379}
+  - component: {fileID: 998920753565513085}
   m_Layer: 6
   m_Name: 2005 BMW M3 GTR E46
   m_TagString: Player
@@ -6470,6 +6472,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkPoint: {x: 0, y: 0.5, z: -2.32933}
   linkRadius: 0.25
+--- !u!65 &8663068854886071379
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162174379603879376}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.69, y: 1, z: 4.5}
+  m_Center: {x: 0, y: 0.48, z: 0}
+--- !u!114 &998920753565513085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162174379603879376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64ea4646e9eb55c4a81081036d27e0c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TTVehicule
 --- !u!1 &1162174379606201326
 GameObject:
   m_ObjectHideFlags: 0
@@ -7749,7 +7784,7 @@ Transform:
   m_GameObject: {fileID: 1162174380097182263}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.76299983, y: 0.32840824, z: -1.246528}
+  m_LocalPosition: {x: 0.763, y: 0.32840824, z: -1.2465277}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -17939,15 +17974,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3747044553880177324, guid: 6fe978f085d03dd41b486679016c3372, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.04555715
+      value: 0.045557145
       objectReference: {fileID: 0}
     - target: {fileID: 3747044553880177324, guid: 6fe978f085d03dd41b486679016c3372, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000064679414
+      value: 0.00006474647
       objectReference: {fileID: 0}
     - target: {fileID: 3747044553880177324, guid: 6fe978f085d03dd41b486679016c3372, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.02956312
+      value: -0.029563127
       objectReference: {fileID: 0}
     - target: {fileID: 3871880001406774524, guid: 6fe978f085d03dd41b486679016c3372, type: 3}
       propertyPath: m_LocalPosition.x
@@ -18103,11 +18138,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4578598512985875414, guid: 6fe978f085d03dd41b486679016c3372, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0102429455
+      value: 0.010243018
       objectReference: {fileID: 0}
     - target: {fileID: 4578598512985875414, guid: 6fe978f085d03dd41b486679016c3372, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0098327445
+      value: 0.009832724
       objectReference: {fileID: 0}
     - target: {fileID: 4601098230909757959, guid: 6fe978f085d03dd41b486679016c3372, type: 3}
       propertyPath: m_LocalRotation.w

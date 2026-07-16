@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 1278821849, guid: 7c0bac27308dcf24eb0bf21c68fb9c41, type: 3}
   m_Name: MVCSettings_Data
   m_EditorClassIdentifier: 
-  settingsFoldout: 9
+  settingsFoldout: 3
   soundEffectsFoldout: 0
   autoCheckForUpdates: 1
   editorValuesUnit: 0
@@ -91,7 +91,7 @@ MonoBehaviour:
   useWheelsMass: 1
   steeringInterpolation: 1
   steerIntensity: 0.6
-  steerReleaseIntensity: 0.6
+  steerReleaseIntensity: 1.25
   maximumSteerAngle: 70
   minimumSteerAngle: 2.5
   useSuspensionAdjustments: 1
