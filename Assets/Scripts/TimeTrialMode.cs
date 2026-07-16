@@ -13,6 +13,9 @@ public class TimeTrialMode : MonoBehaviour
     private GameObject[] checkpoints;
     private int checkpointCounter;
 
+    [SerializeField] private Material whiteTransparentColor;
+    [SerializeField] private Material blueTransparentColor;
+
     void Awake()
     {
         checkpoints= new GameObject[gameObject.transform.childCount];
@@ -26,6 +29,9 @@ public class TimeTrialMode : MonoBehaviour
             //Allows an order to be established based on the order given in this gameobject (CheckpointManager)
             checkpointScript.checkpointNumber = counter;
         }
+
+        //Makes the first checkpoint blue ish
+        checkpoints[checkpointCounter].GetComponent<Renderer>().material = blueTransparentColor;
 
         //Always starts false to let the player gain momentum before the first checkpoint.
         isTimerCounting = false;
@@ -68,6 +74,7 @@ public class TimeTrialMode : MonoBehaviour
     {
         var checkpointScript = cp.GetComponent<Checkpoint>();
 
+        //If all checkpoints where hit in order AND the first checkpoint is hit again
         if (checkpointCounter == checkpoints.Length && checkpointScript.checkpointNumber == 0)
         {
             //For later when you need to save the time 
@@ -79,11 +86,24 @@ public class TimeTrialMode : MonoBehaviour
 
             LapReset();
         }
-        //if checkpoint 1 has been hit, move on to the next one
+        //if a checkpoint has been hit, move on to the next one
         else if (checkpointScript.checkpointNumber == checkpointCounter)
         {
+            //Make previous checkpoint white again
+            checkpoints[checkpointCounter].GetComponent<Renderer>().material = whiteTransparentColor;
+
             checkpointCounter++;
             Debug.Log(checkpointCounter + " / " + checkpoints.Length);
+
+            //If all checkpoints where hit, make the first checkpoint blue again
+            if(checkpointCounter == checkpoints.Length)
+            {
+                checkpoints[0].GetComponent<Renderer>().material = blueTransparentColor;
+                return;
+            }
+
+            //Make the new checkpoint blue (ish)
+            checkpoints[checkpointCounter].GetComponent<Renderer>().material = blueTransparentColor;
         }
 
         //If the first checkpoint is hit, start the timer.
