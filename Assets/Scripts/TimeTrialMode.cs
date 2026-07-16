@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class TimeTrialMode : MonoBehaviour
     [SerializeField] private TMP_Text timerUiText;
     private float timer;
     private bool isTimerCounting;
+    private bool showingLapTime;
 
     //the checkpoints need to be in SUBSEQUENT ORDER 
     private GameObject[] checkpoints;
@@ -35,13 +37,15 @@ public class TimeTrialMode : MonoBehaviour
 
         //Always starts false to let the player gain momentum before the first checkpoint.
         isTimerCounting = false;
+        showingLapTime = false;
         timer = 0;
         checkpointCounter = 0;
     }
 
     void Update()
     {
-        UpdateTimer();
+        if(!showingLapTime)
+            UpdateTimer();
     }
 
     /// <summary>
@@ -80,9 +84,10 @@ public class TimeTrialMode : MonoBehaviour
             //For later when you need to save the time 
             float floatTime = timer;
             string strTime = timerUiText.text;
-            Debug.Log("Lap time : " +  floatTime + " seconds | " + strTime);
 
-            //Add animation showing time
+            //Starts clock animation
+            StartCoroutine(LapCompletionAnimation());            
+            Debug.Log("Lap time : " +  floatTime + " seconds | " + strTime);
 
             LapReset();
         }
@@ -119,6 +124,39 @@ public class TimeTrialMode : MonoBehaviour
     {
         checkpointCounter = 0;
         timer = 0;
-        timerUiText.text = "00:00:00.000";
+    }
+
+    IEnumerator LapCompletionAnimation()
+    {
+        //Freezes the timer on the UI
+        showingLapTime = true;
+        string savedStringLapTime = timerUiText.text;
+
+        float seconds = 0;
+        while(seconds < 5)
+        {
+            //Blinking effect
+            if (seconds < 4)
+            {
+                int intSeconds = (int)seconds;
+                float decimals = seconds - intSeconds;
+                if (decimals > 0.5f)
+                {
+                    timerUiText.text = savedStringLapTime;
+                } else
+                {
+                    timerUiText.text = "";
+                }
+            } else
+            {
+                //last second just shows the time
+                timerUiText.text = savedStringLapTime;
+            }
+            seconds += Time.deltaTime;
+            yield return null;
+        }
+
+        //unfreezes the timer and continues with the new lap currently in progress
+        showingLapTime = false;
     }
 }
