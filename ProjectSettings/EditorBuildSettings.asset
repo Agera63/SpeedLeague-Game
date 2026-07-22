@@ -6,7 +6,16 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/StartingMenu.unity
+    guid: 4c85926e761934247a06d256db8df24c
+  - enabled: 1
     path: Assets/Scenes/Suzuka.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/Shanghai.unity
+    guid: 90606ea856752c94dae4bc721bd091d9
+  - enabled: 1
+    path: Assets/Scenes/Spa.unity
+    guid: 45b9d67dcf8e93445ac42f4e553a48a3
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

@@ -44,8 +44,7 @@ public class TimeTrialMode : MonoBehaviour
 
     void Update()
     {
-        if(!showingLapTime)
-            UpdateTimer();
+        UpdateTimer();
     }
 
     /// <summary>
@@ -66,8 +65,9 @@ public class TimeTrialMode : MonoBehaviour
         //F3 makes the float have 3 digits after. So 1.234s
         string strSeconds = seconds < 10 ? "0" + seconds.ToString("F3") : seconds.ToString("F3");
 
-        //updates the ui text to be the following -> 00:09:13.756
-        timerUiText.text = strHours + ":" + strMinutes + ":" + strSeconds;
+        if (!showingLapTime)
+            //updates the ui text to be the following -> 00:09:13.756
+            timerUiText.text = strHours + ":" + strMinutes + ":" + strSeconds;
     }
 
     /// <summary>
@@ -83,10 +83,7 @@ public class TimeTrialMode : MonoBehaviour
         {
             //For later when you need to save the time 
             float floatTime = timer;
-            string strTime = timerUiText.text;
-
-            //Starts clock animation
-            StartCoroutine(LapCompletionAnimation());            
+            string strTime = timerUiText.text;    
             Debug.Log("Lap time : " +  floatTime + " seconds | " + strTime);
 
             LapReset();
@@ -122,12 +119,15 @@ public class TimeTrialMode : MonoBehaviour
     /// </summary>
     void LapReset()
     {
+        //Starts clock animation
+        StartCoroutine(LapCompletionAnimation());
         checkpointCounter = 0;
-        timer = 0;
     }
 
     IEnumerator LapCompletionAnimation()
     {
+        timer = 0;
+
         //Freezes the timer on the UI
         showingLapTime = true;
         string savedStringLapTime = timerUiText.text;
