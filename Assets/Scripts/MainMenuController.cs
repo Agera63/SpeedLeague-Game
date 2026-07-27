@@ -213,6 +213,11 @@ public class MainMenuController : MonoBehaviour
 
     //-------Login Menu Methods----------------
     
+    public void LoginBack()
+    {
+        loginMenu.SetActive(false);
+        mainMenu.SetActive(true);
+    }
 
     //-------Sign Up Menu Methods----------------
 

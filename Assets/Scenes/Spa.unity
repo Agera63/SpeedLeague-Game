@@ -171,6 +171,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawningManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5553454524284185492, guid: 17cf14889e93a4e43a2b4361c3f6a99a, type: 3}
+      propertyPath: pauseMenuScript
+      value: 
+      objectReference: {fileID: 364949397}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -184,6 +188,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3147349693172533466, guid: 6ccc09dc8f8f9d94581167e498b606e9, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3147349693172533466, guid: 6ccc09dc8f8f9d94581167e498b606e9, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3147349693172533466, guid: 6ccc09dc8f8f9d94581167e498b606e9, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5497908300264478206, guid: 6ccc09dc8f8f9d94581167e498b606e9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5731304230266239121, guid: 6ccc09dc8f8f9d94581167e498b606e9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 584.8698
@@ -224,10 +244,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6193962988099230295, guid: 6ccc09dc8f8f9d94581167e498b606e9, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6193962988099230295, guid: 6ccc09dc8f8f9d94581167e498b606e9, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7964268890667569482, guid: 6ccc09dc8f8f9d94581167e498b606e9, type: 3}
       propertyPath: m_Name
       value: GameUI
       objectReference: {fileID: 0}
+    - target: {fileID: 9153583466697071625, guid: 6ccc09dc8f8f9d94581167e498b606e9, type: 3}
+      propertyPath: timeTrialScript
+      value: 
+      objectReference: {fileID: 2967429472081160962}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -244,6 +276,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!114 &364949397 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9153583466697071625, guid: 6ccc09dc8f8f9d94581167e498b606e9, type: 3}
+  m_PrefabInstance: {fileID: 364949395}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8abd254f759e6a4a98e355157a80694, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PauseMenu
 --- !u!1 &2008800138
 GameObject:
   m_ObjectHideFlags: 0
@@ -432,6 +475,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7598b6d84c6024e45a72265ecc8367e7, type: 3}
+--- !u!114 &2967429472081160962 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1377989054941445484, guid: 7598b6d84c6024e45a72265ecc8367e7, type: 3}
+  m_PrefabInstance: {fileID: 2967429472081160961}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9832dab6db77bbc40ab86f2852fc6918, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TimeTrialMode
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

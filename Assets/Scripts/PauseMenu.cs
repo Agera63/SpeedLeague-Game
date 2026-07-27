@@ -1,16 +1,22 @@
 using MVC;
 using MVC.Core;
 using Unity.Entities;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static System.Net.Mime.MediaTypeNames;
 
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private Slider volumeSlider;
+    [SerializeField] private TimeTrialMode timeTrialScript;
+
     private ToolkitSettings settings;
+    public GameObject player;
 
     void Start()
     {
@@ -63,7 +69,48 @@ public class PauseMenu : MonoBehaviour
 
     public void ResetOption()
     {
-        
+        //assures that the cars momentum is not kept and gets reset too
+        var carRB = player.GetComponent<Rigidbody>();
+        carRB.linearVelocity = Vector3.zero;
+        carRB.angularVelocity = Vector3.zero;
+
+        Vector3 spawnPos;
+        Quaternion spawnRot;
+
+        //Checks for the track that the player is playing and respawns the car
+        switch (SettingsManager.instance.selectedTrack)
+        {
+            case "Spa":
+                spawnPos = SpawnInfo.Spa.position;
+                spawnRot = SpawnInfo.Spa.rotation;
+                break;
+            case "Suzuka":
+                spawnPos = SpawnInfo.Suzuka.position;
+                spawnRot = SpawnInfo.Suzuka.rotation;
+                break;
+            case "Shanghai":
+                spawnPos = SpawnInfo.Shanghai.position;
+                spawnRot = SpawnInfo.Shanghai.rotation;
+                break;
+            default:
+                spawnPos = player.transform.position;
+                spawnRot = player.transform.rotation;
+                break;
+        }
+
+        // Set BOTH transform and rigidbody, then force physics to acknowledge it now
+        player.transform.SetPositionAndRotation(spawnPos, spawnRot);
+        carRB.position = spawnPos;
+        carRB.rotation = spawnRot;
+
+        //forces physics engine to update immediately, instead of waiting for next FixedUpdate
+        Physics.SyncTransforms();
+
+        //Timer reset
+        timeTrialScript.TimerReset();
+
+        //Close menu
+        TogglePause();
     }
 
     public void ExitOption()

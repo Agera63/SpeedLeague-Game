@@ -159,4 +159,20 @@ public class TimeTrialMode : MonoBehaviour
         //unfreezes the timer and continues with the new lap currently in progress
         showingLapTime = false;
     }
+
+    /// <summary>
+    /// Once a reset has been called in the pause menu,
+    /// the timer gets reset
+    /// </summary>
+    public void TimerReset()
+    {
+        isTimerCounting = false;
+        timer = 0;
+
+        //Resets the checkpoint color
+        checkpoints[checkpointCounter].GetComponent<Renderer>().material = whiteTransparentColor;
+        checkpoints[0].GetComponent<Renderer>().material = blueTransparentColor;
+
+        checkpointCounter = 0;
+    }
 }
