@@ -16,9 +16,6 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private GameObject loginMenu;
     [SerializeField] private GameObject signUpMenu;
 
-    public event Action<string> carSelection;
-    public event Action<string> trackSelection;
-
     void Start()
     {
         foreach (RawImage ri in imageEcranMenu)
@@ -154,7 +151,7 @@ public class MainMenuController : MonoBehaviour
     /// </summary>
     public void SupraSelection()
     {
-        carSelection?.Invoke("Supra");
+        SettingsManager.instance.SetSelectedCar("Supra");
         carsMenu.SetActive(false);
         mainMenu.SetActive(true);
     }
@@ -164,7 +161,7 @@ public class MainMenuController : MonoBehaviour
     /// </summary>
     public void BMWSelection()
     {
-        carSelection?.Invoke("BMW");
+        SettingsManager.instance.SetSelectedCar("BMW");
         carsMenu.SetActive(false);
         mainMenu.SetActive(true);
     }
@@ -174,7 +171,7 @@ public class MainMenuController : MonoBehaviour
     /// </summary>
     public void LexusSelection()
     {
-        carSelection?.Invoke("Lexus");
+        SettingsManager.instance.SetSelectedCar("Lexus");
         carsMenu.SetActive(false);
         mainMenu.SetActive(true);
     }
@@ -186,7 +183,7 @@ public class MainMenuController : MonoBehaviour
     /// </summary>
     public void SpaSelection()
     {
-        trackSelection?.Invoke("Spa");
+        SettingsManager.instance.SetSelectedTrack("Spa");
         tracksMenu.SetActive(false);
         mainMenu.SetActive(true);
     }
@@ -196,7 +193,7 @@ public class MainMenuController : MonoBehaviour
     /// </summary>
     public void SuzukaSelection()
     {
-        trackSelection?.Invoke("Suzuka");
+        SettingsManager.instance.SetSelectedTrack("Suzuka");
         tracksMenu.SetActive(false);
         mainMenu.SetActive(true);
     }
@@ -206,13 +203,13 @@ public class MainMenuController : MonoBehaviour
     /// </summary>
     public void ShanghaiSelection()
     {
-        trackSelection?.Invoke("Shanghai");
+        SettingsManager.instance.SetSelectedTrack("Shanghai");
         tracksMenu.SetActive(false);
         mainMenu.SetActive(true);
     }
 
     //-------Login Menu Methods----------------
-    
+
     public void LoginBack()
     {
         loginMenu.SetActive(false);

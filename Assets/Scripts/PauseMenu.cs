@@ -115,6 +115,7 @@ public class PauseMenu : MonoBehaviour
 
     public void ExitOption()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("StartingMenu");
     }
 }
