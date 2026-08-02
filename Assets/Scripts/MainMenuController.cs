@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,25 +17,32 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private GameObject loginMenu;
     [SerializeField] private GameObject signUpMenu;
 
-    void Start()
+    [SerializeField] private TMP_InputField username;
+    [SerializeField] private TMP_InputField password;
+    [SerializeField] private TMP_Text errorMsg;
+
+    [SerializeField] private GameObject loginBtn;
+    [SerializeField] private GameObject logoutBtn;
+
+    async void Start()
     {
         foreach (RawImage ri in imageEcranMenu)
         {
-            ri.color = new Color(
-                    imageMontrer.color.r,
-                    imageMontrer.color.g,
-                    imageMontrer.color.b,
-                    0);
+            Color c = ri.color;
+            ri.color = new Color(c.r, c.g, c.b, 0);
         }
 
         imageMontrer = imageEcranMenu[0];
-        imageMontrer.color = new Color(
-                    imageMontrer.color.r,
-                    imageMontrer.color.g,
-                    imageMontrer.color.b,
-                    255);
+        Color mc = imageMontrer.color;
+        imageMontrer.color = new Color(mc.r, mc.g, mc.b, 255);
 
         tempsAvantProchaineImage = 10f;
+
+        if (await APIMananger.instance.Validate())
+        {
+            loginBtn.SetActive(false);
+            logoutBtn.SetActive(true);
+        }
     }
 
     void Update()
@@ -93,20 +101,28 @@ public class MainMenuController : MonoBehaviour
     /// Allows the user to play once the "Play" 
     /// button was clicked.
     /// </summary>
-    public void Play()
+    public async void Play()
     {
         //Make sure user is loged in
+        bool validLogin = await APIMananger.instance.Validate();
 
-
-        //Change scene
-        SceneManager.LoadScene(SettingsManager.instance.selectedTrack);
+        if (PlayerPrefs.GetString("token") != "" && validLogin)
+        {
+            //Change scene
+            SceneManager.LoadScene(SettingsManager.instance.selectedTrack);
+        } else
+        {
+            LogInMenu();
+            errorMsg.text = "You where automatically disconnected, login again!";
+        }
+        
     }
 
     /// <summary>
     /// Redirects the user to the car menu where they can 
     /// select the car they wish to drive.
     /// </summary>
-    public void Cars()
+    public void CarsMenu()
     {
         carsMenu.SetActive(true);
         mainMenu.SetActive(false);
@@ -117,7 +133,7 @@ public class MainMenuController : MonoBehaviour
     /// Redirects the user to the track menu where they can 
     /// select the track they wish to drive on.
     /// </summary>
-    public void Tracks()
+    public void TracksMenu()
     {
         tracksMenu.SetActive(true);
         mainMenu.SetActive(false);
@@ -126,10 +142,18 @@ public class MainMenuController : MonoBehaviour
     /// <summary>
     /// Redirects the user to the login menu
     /// </summary>
-    public void LogIn()
+    public void LogInMenu()
     {
         loginMenu.SetActive(true);
         mainMenu.SetActive(false);
+    }
+
+    public void Logout()
+    {
+        PlayerPrefs.DeleteKey("token"); // clear the stale token
+        logoutBtn.SetActive(false);
+        loginBtn.SetActive(true);
+        LogInMenu();
     }
 
     /// <summary>
@@ -151,7 +175,7 @@ public class MainMenuController : MonoBehaviour
     /// </summary>
     public void SupraSelection()
     {
-        SettingsManager.instance.SetSelectedCar("Supra");
+        SettingsManager.instance.SetSelectedCar("Toyota");
         carsMenu.SetActive(false);
         mainMenu.SetActive(true);
     }
@@ -210,12 +234,31 @@ public class MainMenuController : MonoBehaviour
 
     //-------Login Menu Methods----------------
 
+    public async void Login()
+    {
+        errorMsg.text = "Loading...";
+        bool validLogin = await APIMananger.instance.Login(username.text, password.text);
+
+        if(validLogin)
+        {
+            loginBtn.SetActive(false);
+            logoutBtn.SetActive(true);
+            LoginBack();
+        } else
+        {
+            errorMsg.text = "Incorrect information! Please try again.";
+        }
+    }
+
+    public void SignupBtn()
+    {
+        errorMsg.text = "Please sign up within your browser!";
+        Application.OpenURL("https://speed-league.vercel.app/signup");
+    }
+
     public void LoginBack()
     {
         loginMenu.SetActive(false);
         mainMenu.SetActive(true);
     }
-
-    //-------Sign Up Menu Methods----------------
-
 }
