@@ -25,30 +25,34 @@ public class SettingsManager : MonoBehaviour
 
         // Only set defaults the very first time this is created
         if(selectedCar == null)
-            selectedCar = Toyota;
+        {
+            instance.selectedCar = Toyota;
+            instance.selectedCarString = "Toyota";
+        }
+            
         if (string.IsNullOrEmpty(selectedTrack))
             selectedTrack = "Spa";
     }
 
     public void SetSelectedCar(string newCar)
     {
-        selectedCarString = newCar;
+        instance.selectedCarString = newCar;
         switch (newCar)
         {
             case "Toyota":
-                selectedCar = Toyota;
+                instance.selectedCar = Toyota;
                 break;
             case "BMW":
-                selectedCar = BMW;
+                instance.selectedCar = BMW;
                 break;
             case "Lexus":
-                selectedCar = Lexus;
+                instance.selectedCar = Lexus;
                 break;
         }
     }
 
     public void SetSelectedTrack(string newTrack)
     {
-        selectedTrack = newTrack;
+        instance.selectedTrack = newTrack;
     }
 }

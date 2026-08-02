@@ -3,6 +3,7 @@ using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class TimeTrialMode : MonoBehaviour
 {
@@ -117,11 +118,23 @@ public class TimeTrialMode : MonoBehaviour
     /// Once the player succesfully drove a lap around the circuit, 
     /// this method reset the ui and the code.
     /// </summary>
-    void LapReset()
+    async void LapReset()
     {
-        //Starts clock animation
+        float lapTime = timer;  // capture the real value first
+
         StartCoroutine(LapCompletionAnimation());
         checkpointCounter = 0;
+
+        bool validTime = await APIMananger.instance.AddTime(lapTime);
+        if (!validTime)
+        {
+            Debug.Log("Invalid save");
+            StartCoroutine(StorageError());
+        }
+        else
+        {
+            Debug.Log("New time successfully added!");
+        }
     }
 
     IEnumerator LapCompletionAnimation()
@@ -151,6 +164,42 @@ public class TimeTrialMode : MonoBehaviour
             {
                 //last second just shows the time
                 timerUiText.text = savedStringLapTime;
+            }
+            seconds += Time.deltaTime;
+            yield return null;
+        }
+
+        //unfreezes the timer and continues with the new lap currently in progress
+        showingLapTime = false;
+    }
+
+    IEnumerator StorageError()
+    {
+        //Freezes the timer on the UI
+        showingLapTime = true;
+        string savedErrorMsg = "Error storing your last lap. Please restart the game.";
+
+        float seconds = 0;
+        while (seconds < 5)
+        {
+            //Blinking effect
+            if (seconds < 4)
+            {
+                int intSeconds = (int)seconds;
+                float decimals = seconds - intSeconds;
+                if (decimals > 0.5f)
+                {
+                    timerUiText.text = savedErrorMsg;
+                }
+                else
+                {
+                    timerUiText.text = "";
+                }
+            }
+            else
+            {
+                //last second just shows the time
+                timerUiText.text = savedErrorMsg;
             }
             seconds += Time.deltaTime;
             yield return null;

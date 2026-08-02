@@ -37,6 +37,20 @@ public class APIMananger
             PlayerPrefs.Save();
 
             Debug.Log("Login successful.");
+
+            // No userId in the login response — resolve it separately via GetAllUsers
+            string userId = await GetCurrentUserId(username);
+            if (userId != null)
+            {
+                PlayerPrefs.SetString("userId", userId);
+                PlayerPrefs.Save();
+                Debug.Log($"Resolved userId: {userId}");
+            }
+            else
+            {
+                Debug.LogError("Login succeeded but could not resolve a matching userId.");
+            }
+
             return true;
         }
         else
@@ -122,16 +136,20 @@ public class APIMananger
 
         using var response = await client.SendAsync(request);
 
+        string json = await response.Content.ReadAsStringAsync();
+        Debug.Log($"GetAllCars status: {response.StatusCode}");
+        Debug.Log($"GetAllCars raw response: {json}");
+
         if (!response.IsSuccessStatusCode)
         {
             Debug.LogError($"Failed to get cars ({response.StatusCode})");
             return new List<Car>();
         }
 
-        string json = await response.Content.ReadAsStringAsync();
-        // JsonUtility can't parse a bare array — wrap it first
         string wrapped = "{\"items\":" + json + "}";
-        return JsonUtility.FromJson<CarListWrapper>(wrapped).items;
+        var result = JsonUtility.FromJson<CarListWrapper>(wrapped);
+        Debug.Log($"Parsed car count: {result.items?.Count ?? 0}");
+        return result.items;
     }
 
     public async Task<List<Track>> GetAllTracks()
@@ -152,11 +170,29 @@ public class APIMananger
         return JsonUtility.FromJson<TrackListWrapper>(wrapped).items;
     }
 
+    public async Task<List<User>> GetAllUsers()
+    {
+        var request = new HttpRequestMessage(HttpMethod.Get, $"{BaseUrl}/api/User");
+        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", PlayerPrefs.GetString("token"));
+
+        using var response = await client.SendAsync(request);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            Debug.LogError($"Failed to get users ({response.StatusCode})");
+            return new List<User>();
+        }
+
+        string json = await response.Content.ReadAsStringAsync();
+        string wrapped = "{\"items\":" + json + "}";
+        return JsonUtility.FromJson<UserListWrapper>(wrapped).items;
+    }
+
     public async Task<string> FindCarIdByName(string carName)
     {
         var cars = await GetAllCars();
         var match = cars.FirstOrDefault(c =>
-            $"{c.brand} {c.model}".Equals(carName, StringComparison.OrdinalIgnoreCase));
+            $"{c.brand}".Equals(carName, StringComparison.OrdinalIgnoreCase));
         return match?.carId;
     }
 
@@ -166,6 +202,14 @@ public class APIMananger
         var match = tracks.FirstOrDefault(t =>
             t.name.Equals(trackName, StringComparison.OrdinalIgnoreCase));
         return match?.trackId;
+    }
+
+    public async Task<string> GetCurrentUserId(string username)
+    {
+        var users = await GetAllUsers();
+        var match = users.FirstOrDefault(u =>
+            u.username.Equals(username, StringComparison.OrdinalIgnoreCase));
+        return match?.userId;
     }
 }
 
@@ -211,6 +255,13 @@ public class Track
 }
 
 [Serializable]
+public class User
+{
+    public string userId;
+    public string username;
+}
+
+[Serializable]
 public class CarListWrapper
 {
     public List<Car> items;
@@ -220,6 +271,12 @@ public class CarListWrapper
 public class TrackListWrapper
 {
     public List<Track> items;
+}
+
+[Serializable]
+public class UserListWrapper
+{
+    public List<User> items;
 }
 
 [Serializable]
