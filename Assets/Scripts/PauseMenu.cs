@@ -15,6 +15,8 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private Slider volumeSlider;
     [SerializeField] private TimeTrialMode timeTrialScript;
 
+    [SerializeField] private LevelLoader LLScript;
+
     private ToolkitSettings settings;
     public GameObject player;
 
@@ -116,6 +118,7 @@ public class PauseMenu : MonoBehaviour
     public void ExitOption()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene("StartingMenu");
+        TogglePause();
+        LLScript.LoadNextScene("StartingMenu");
     }
 }

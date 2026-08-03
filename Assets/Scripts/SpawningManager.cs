@@ -6,9 +6,6 @@ public class SpawningManager : MonoBehaviour
     [SerializeField] private PauseMenu pauseMenuScript;
     void Start()
     {
-        //Checks if there is currently a player in the pause menu
-        if (pauseMenuScript.player != null) return;
-
         if (SettingsManager.instance.selectedTrack.Equals("Spa"))
         {
             pauseMenuScript.player = Instantiate(SettingsManager.instance.selectedCar,

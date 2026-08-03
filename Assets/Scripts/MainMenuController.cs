@@ -24,6 +24,8 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private GameObject loginBtn;
     [SerializeField] private GameObject logoutBtn;
 
+    [SerializeField] private LevelLoader LLScript;
+
     async void Start()
     {
         foreach (RawImage ri in imageEcranMenu)
@@ -109,7 +111,7 @@ public class MainMenuController : MonoBehaviour
         if (PlayerPrefs.GetString("token") != "" && validLogin)
         {
             //Change scene
-            SceneManager.LoadScene(SettingsManager.instance.selectedTrack);
+            LLScript.LoadNextScene(SettingsManager.instance.selectedTrack);
         } else
         {
             LogInMenu();

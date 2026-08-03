@@ -173,7 +173,7 @@ MonoBehaviour:
   engineSFXFolderPath: SFX/Engines
   engineSFXNameSplitter: 95
   maxEngineSFXClips: 7
-  SFXVolume: 0.055330962
+  SFXVolume: 0.06316321
   impactClips:
     cars:
       low:
