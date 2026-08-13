@@ -215,6 +215,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!114 &68308528 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3905538013781436818, guid: 6ccc09dc8f8f9d94581167e498b606e9, type: 3}
+  m_PrefabInstance: {fileID: 68308526}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!114 &68308529 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9153583466697071625, guid: 6ccc09dc8f8f9d94581167e498b606e9, type: 3}
+  m_PrefabInstance: {fileID: 68308526}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8abd254f759e6a4a98e355157a80694, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PauseMenu
 --- !u!1001 &1833049612
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -473,7 +495,7 @@ PrefabInstance:
     - target: {fileID: 5553454524284185492, guid: 17cf14889e93a4e43a2b4361c3f6a99a, type: 3}
       propertyPath: pauseMenuScript
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 68308529}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -491,6 +513,10 @@ PrefabInstance:
       propertyPath: timerUiText
       value: 
       objectReference: {fileID: 68308527}
+    - target: {fileID: 5715609626732886912, guid: d845c7b79576cb14bb20b02055a257c8, type: 3}
+      propertyPath: checkpointUiText
+      value: 
+      objectReference: {fileID: 68308528}
     - target: {fileID: 7673655684972200960, guid: d845c7b79576cb14bb20b02055a257c8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

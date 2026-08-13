@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 public class TimeTrialMode : MonoBehaviour
 {
     [SerializeField] private TMP_Text timerUiText;
+    [SerializeField] private TMP_Text checkpointUiText;
     private float timer;
     private bool isTimerCounting;
     private bool showingLapTime;
@@ -21,7 +22,8 @@ public class TimeTrialMode : MonoBehaviour
 
     void Awake()
     {
-        checkpoints= new GameObject[gameObject.transform.childCount];
+
+        checkpoints = new GameObject[gameObject.transform.childCount];
         for (int counter = 0; counter < gameObject.transform.childCount; counter++) 
         {
             GameObject checkpointGO = gameObject.transform.GetChild(counter).gameObject;
@@ -82,6 +84,10 @@ public class TimeTrialMode : MonoBehaviour
         //If all checkpoints where hit in order AND the first checkpoint is hit again
         if (checkpointCounter == checkpoints.Length && checkpointScript.checkpointNumber == 0)
         {
+            //Makes sure the first checkpoint is white and the second one becomes blue again (small bug fix)
+            checkpoints[0].GetComponent<Renderer>().material = whiteTransparentColor;
+            checkpoints[1].GetComponent<Renderer>().material = blueTransparentColor;
+
             //For later when you need to save the time 
             float floatTime = timer;
             string strTime = timerUiText.text;    
@@ -96,10 +102,9 @@ public class TimeTrialMode : MonoBehaviour
             checkpoints[checkpointCounter].GetComponent<Renderer>().material = whiteTransparentColor;
 
             checkpointCounter++;
-            Debug.Log(checkpointCounter + " / " + checkpoints.Length);
 
             //If all checkpoints where hit, make the first checkpoint blue again
-            if(checkpointCounter == checkpoints.Length)
+            if (checkpointCounter == checkpoints.Length)
             {
                 checkpoints[0].GetComponent<Renderer>().material = blueTransparentColor;
                 return;
@@ -108,6 +113,8 @@ public class TimeTrialMode : MonoBehaviour
             //Make the new checkpoint blue (ish)
             checkpoints[checkpointCounter].GetComponent<Renderer>().material = blueTransparentColor;
         }
+        //Updates the checkpoint numbers
+        checkpointUiText.text = (checkpointCounter) + "/" + (checkpoints.Length);
 
         //If the first checkpoint is hit, start the timer.
         if (!isTimerCounting && checkpointCounter != 0)
@@ -123,7 +130,7 @@ public class TimeTrialMode : MonoBehaviour
         float lapTime = timer;  // capture the real value first
 
         StartCoroutine(LapCompletionAnimation());
-        checkpointCounter = 0;
+        checkpointCounter = 1;
 
         bool validTime = await APIMananger.instance.AddTime(lapTime);
         if (!validTime)
